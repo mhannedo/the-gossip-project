@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="display-4 text-center my-5">"La page d'auteur"</h1>
+
+  <div class="row justify-content-center">
+
+    <div class="card flex-row flex-wrap">
+      <div class="card-header border-0">
+        <img src="https://medias.spotern.com/spots/w640/9/9569-1584630030.jpg" alt=""
+             width="300">
+      </div>
+      <div class="card-block px-2 mt-4 ml-3">
+        <h4 class="card-title h2"><%= @user.first_name %> </h4>
+        <p class="card-text"><span class="h5">Nom : </span><%= @user.last_name %> </p>
+        <p class="card-text"><span class="h5">E-mail : </span><%= @user.email %> </p>
+        <p class="card-text"><span class="h5">Age : </span><%= @user.age %> ans</p>
+        <p class="card-text"><span class="h5"> Nom de la ville : </span> <a href= "<%= city_path(@gossip.id)%>"> <%= @user.city.name %> </a> </p>
+      </div>
+    </div>
+  </div>
+</div>
+

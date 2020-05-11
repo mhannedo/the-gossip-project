@@ -1,0 +1,105 @@
+<div class="container">
+  <h1 class="display-4 text-center my-3">The Gossip number <%=@gossip.id%> </h1>
+
+  <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="card">
+          <img class="card-img-top" alt="Card image cap" src="http://static.hitek.fr/img/actualite/2016/06/27/w_forrestgump2.jpg">
+          <div class="card-body">
+            <h5 class="card-title"><%=@gossip.title %></h5>
+            <p class="card-text"><%= @gossip.content %></p>
+            <p class="card-text">
+            <p class="card-text">
+              <small class="text-muted">
+                posté par <a href=" <%= user_path(@gossip.id) %>"><%= @gossip.user.first_name %> </a> venant de <a href="<%= city_path(@gossip.id) %>"><%= @gossip.user.city.name %> </a>
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+      </div> <br>   
+      <% flash.each do %>
+        <div class="alert alert-danger text-center">
+        
+        <%= flash[:notice] %>        
+        </div>
+       
+    <%end%>
+<br>   
+  
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <a href =" <%= edit_gossip_path(@gossip.id) %>" class="btn btn-warning"> Updater l'article </a> 
+
+      <a href =" <%= gossip_path(@gossip.id) %>" class="btn btn-danger" data-method="DELETE"> Supprimer l'article </a>
+    </div> 
+  </div> 
+
+  <br> 
+  <div class="container">
+    <div class="row justify-content-center">
+      <a href ="<%= likes_path %>" class="btn btn-primary" {id : @gossip.id)}  data-method="POST"> Liker </a>
+    </div> 
+  </div> 
+  <br>
+  
+  
+       
+<div class="container">
+    <div class="row justify-content-center">
+  
+      <%= form_for @comment do |f| %>
+
+        <div class="form-group">
+          <label> Contenu du commentaire <label>
+          <%= f.text_area :content, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+        <button type="submit"> Poster le commentaire </button>
+        </div>
+
+        <input name="gossip_id" type="hidden" value="<%=@gossip.id %>" />
+      <% end %>
+
+   </div>
+</div>
+
+<br> 
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+       <table class="table">
+            <thead class="thead-dark">
+              <tr>
+               <th scope="col">ID</th>
+                <th scope="col">User</th>
+                <th scope="col">Contenu</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody>
+                <% Comment.all.each do |comment| %>
+                  <% if comment.gossip_id == @gossip.id %> 
+
+                  <tr>
+                    <td><%=comment.id%></td>
+                    <td><%=User.find_by(id: comment.user_id).first_name%></td>
+                    <td><%=comment.content%></td>
+                    <td><a href="<%=edit_comment_path(comment.id)%>"> Modifier le commentaire </a> </td>
+                    
+                  </tr>
+                  <% end %>
+                  <% end %>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+
+  
+
+
+

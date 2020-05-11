@@ -1,0 +1,55 @@
+
+<div class="container">
+        <h1 class="display-4 text-center my-5">Création d un nouvel utilisateur</h1>
+
+
+        <% flash.each do%>
+
+            <div class="alert alert-danger text-center">
+                <%=  flash[:notice] %>
+                <% if @user.errors.any? %>
+                <ul> "Il y a une erreur dans le formulaire"
+                    <% @user.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                </ul>
+                <% end %>
+            </div>
+        <% end %>
+
+        <br>
+    
+    <div class="row justify-content-center">
+
+        <%= form_for @user do |f| %>
+          
+            <div class="form-group">
+            <label> Email <label>
+            <%= f.text_field :email, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+            <label> Mot de passe <label>
+            <%= f.text_field :password, class: 'form-control' %>
+            </div>
+            
+            <div class="form-group">
+            <label> Prénom <label>
+            <%= f.text_field :first_name, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+            <label> Nom <label>
+            <%= f.text_field :last_name, class: 'form-control' %>
+            </div>
+            
+            <div class="form-group">
+            <button type="submit"> Valider </button>
+            </div>
+
+        <% end %>
+
+    </div>
+    </div>
+
+</div>

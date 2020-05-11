@@ -1,0 +1,40 @@
+
+
+<div class="container">
+  <h1 class="display-4 text-center my-3">The Gossip Project</h1>
+
+  
+  <%flash.each do %>
+    <div class="alert alert-success text-center">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+
+  <a type="button" class="btn btn-success btn-block" href="<%=new_gossip_path%>"> Créer un potin </a><br><br>
+
+<div class="row">
+ <% Gossip.all.each do |gossip| %>
+    <div class="col-4 mb-3">
+        <div class="card">
+          <img class="card-img-top" alt="Card image cap" src="https://lelombrik.net/comment/5eb298012d522.jpg">
+          <div class="card-body">
+            <h5 class="card-title"><%=gossip.title %></h5>
+            <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
+            <p class="card-text">
+            <small class="text-muted">
+              posté par <a href="<%= user_path(gossip.id) %>"><%=gossip.user.first_name %></a>
+              le <%=gossip.created_at.strftime("%d/%m/%Y %H:%I") %>
+              </small> <br>
+              <small class="text-muted"> contient <%=gossip.comments.count%> commentaire(s) </small>
+              </p>
+            <a type="button" class="btn btn-primary btn-block" href="<%=gossip_path(id: gossip.id) %>">Voir le potin</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    </div>
+
+
+    

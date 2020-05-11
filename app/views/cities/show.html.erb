@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="display-4 text-center my-5">La page de la ville</h1>
+
+  <div class="row justify-content-center">
+
+    <div class=" flex-row flex-wrap">
+     
+        <p ><span class="h5">Nom de la ville : </span><%= @city.name %> </p>
+
+ <div class="row">
+ <% Gossip.all.each do |gossip| %>
+  <% if gossip.user.city == @city %>  
+  <div class="col-4 mb-3">
+        <div class="card">
+          <img class="card-img-top" alt="Card image cap" src="https://lelombrik.net/comment/5eb298012d522.jpg">
+          <div class="card-body">
+            <h5 class="card-title"><%=gossip.title %></h5>
+            <p class="card-text"><%= truncate gossip.content, length: 30 %></p>
+            <p class="card-text">
+            <small class="text-muted">
+              posté par <a href="<%= user_path(gossip.id) %>"><%=gossip.user.first_name %></a>
+              le <%=gossip.created_at.strftime("%d/%m/%Y %H:%I") %>
+              </small>
+            </p>
+            <a type="button" class="btn btn-primary btn-block" href="<%=gossip_path(id: gossip.id) %>">Voir le potin</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+    </div>
+    </div>
+
+      
+    </div>
+  </div>
+</div>
+
